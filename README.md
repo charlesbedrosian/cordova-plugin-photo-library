@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/terikon/cordova-plugin-photo-library.svg?branch=master)](https://travis-ci.org/terikon/cordova-plugin-photo-library)
 
+Known issues:
+- This plugin does not work with WKWebView. Please do not use it if you planning to switch to WKWebView, until someone will resolve this issue.
+
 That's how it looks and performs in real app:
 
 [![](https://img.youtube.com/vi/qHnnRsZ7klE/0.jpg)](https://www.youtube.com/watch?v=qHnnRsZ7klE)
@@ -40,7 +43,7 @@ Please write tests for your contribution.
 Add cdvphotolibrary protocol to Content-Security-Policy, like this:
 
 ```
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: cdvphotolibrary:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: gap: ws: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: cdvphotolibrary:">
 ```
 
 For remarks about angular/ionic usage, see below.
@@ -169,6 +172,7 @@ cordova.plugins.photoLibrary.getLibrary(
     itemsInChunk: 100, // Loading large library takes time, so output can be chunked so that result callback will be called on
     chunkTimeSec: 0.5, // each X items, or after Y secons passes. You can start displaying photos immediately.
     useOriginalFileNames: false, // default, true will be much slower on iOS
+    maxItems: 200, // limit the number of items to return
   }
 );
 ```
